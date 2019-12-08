@@ -11,8 +11,18 @@ def summation_of_primes(n=1999999):
     sieve = sieve_of_eratosthenes(n)
     primes = [x for x in range(0, n) if sieve[x]]
     sum = reduce(lambda x, y: x + y, primes)
-    return str(sum)
+    return sum
 
+def power_digit_sum(n=2 ** 1000):
+  """
+  2 ** 15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+  What is the sum of the digits of the number 2 ** 1000?
+  """
+  characters = list(str(n))
+  digits = list(map(lambda x: int(x), characters))
+  sum = reduce(lambda x, y: x + y, digits)
+  return sum
 
 def pandigital_prime(n):
     """
@@ -25,4 +35,4 @@ def pandigital_prime(n):
     sieve = sieve_of_eratosthenes(max)
     primes = [x for x in range(0, max) if sieve[x]]
     pandigitals = [x for x in primes if is_pandigital(x)]
-    return str(pandigitals[-1])
+    return pandigitals[-1]

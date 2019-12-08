@@ -1,7 +1,9 @@
 from flask import Flask, render_template, g, url_for
 from time import time
+from sys import argv
+import logging
 
-from solutions import summation_of_primes, pandigital_prime
+from solutions import *
 
 app = Flask(__name__)
 
@@ -11,17 +13,18 @@ def render_solution(solution, title, input=None):
     if (input == None):
         input = solution.__defaults__[0]
     try:
-        answer = solution(input)
-        duration = time() - g.start_time
-        return render_template('solution.html', title=title, description=description, answer=answer, duration='%.3f' % duration)
-    except:
+        answer = str(solution(input))
+        duration = '%.3f' % (time() - g.start_time)
+        return render_template('solution.html', title=title, description=description, answer=answer, duration=duration)
+    except Exception as e:
+        logging.exception(e)
         return render_template('error.html')
 
 
 def problems_list(url_map):
     problems = []
     for rule in url_map.iter_rules():
-        if (rule.endpoint in ['home', 'static']):
+        if ('problem_' not in rule.endpoint):
             continue
         problem = {}
         problem['name'] = app.view_functions[rule.endpoint].__doc__
@@ -45,18 +48,29 @@ def home():
 
 
 @app.route('/problem/10')
-def ten():
+def problem_10():
     """Summation of primes"""
-    title = ten.__doc__
+    title = problem_10.__doc__
     return render_solution(summation_of_primes, title)
 
 
+@app.route('/problem/16')
+def problem_16():
+    """Power digit sum"""
+    title = problem_16.__doc__
+    return render_solution(power_digit_sum, title)
+
+
 @app.route('/problem/41/input/<int:input>')
-def forty_one(input):
+def problem_41(input):
     """Pandigital prime"""
-    title = forty_one.__doc__
+    title = problem_41.__doc__
     return render_solution(pandigital_prime, title, input)
 
 
 if __name__ == '__main__':
-    app.run()
+    debug = False
+    for arg in argv[1:]:
+        if (arg == '--debug'):
+            debug = True
+    app.run(debug=debug)
