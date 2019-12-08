@@ -1,5 +1,6 @@
-from utils.utils import sieve_of_eratosthenes, is_pandigital
+from utils.utils import *
 from functools import reduce
+from math import factorial
 
 
 def summation_of_primes(n=1999999):
@@ -13,16 +14,27 @@ def summation_of_primes(n=1999999):
     sum = reduce(lambda x, y: x + y, primes)
     return sum
 
-def power_digit_sum(n=2 ** 1000):
-  """
-  2 ** 15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
 
-  What is the sum of the digits of the number 2 ** 1000?
-  """
-  characters = list(str(n))
-  digits = list(map(lambda x: int(x), characters))
-  sum = reduce(lambda x, y: x + y, digits)
-  return sum
+def power_digit_sum(n=1000):
+    """
+    2 ** 15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+    What is the sum of the digits of the number 2 ** 1000?
+    """
+    return sum_of_digits(2 ** n)
+
+
+def factorial_digit_sum(n=100):
+    """
+    n! means n × (n − 1) × ... × 3 × 2 × 1
+
+    For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+    and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+
+    Find the sum of the digits in the number 100!
+    """
+    return sum_of_digits(factorial(n))
+
 
 def pandigital_prime(n):
     """

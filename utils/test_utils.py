@@ -1,4 +1,4 @@
-from utils import is_pandigital, sieve_of_eratosthenes
+from utils import *
 from unittest import main, TestCase
 
 
@@ -23,6 +23,11 @@ class TestPrime(TestCase):
 
     def test_should_return_true(self):
         self.assertFalse(9942 in self.primes)
+
+
+class TestSumOfDigits(TestCase):
+    def test_sum_of_digits(self):
+        self.assertEqual(sum_of_digits(12345), 15)
 
 
 if __name__ == '__main__':
