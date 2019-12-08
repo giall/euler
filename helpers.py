@@ -2,6 +2,7 @@ from flask import render_template, g, url_for
 from time import time
 import logging
 
+
 def render_solution(solution, title, input=None):
     description = solution.__doc__
     if (input == None):
@@ -18,15 +19,16 @@ def render_solution(solution, title, input=None):
 def problems_list(url_map, globals):
     problems = []
     for rule in url_map.iter_rules():
-        if ('problem_' not in rule.endpoint):
+        endpoint = rule.endpoint
+        if ('problem_' not in endpoint):
             continue
         problem = {}
-        func = globals.get(rule.endpoint)
+        func = globals.get(endpoint)
         problem['name'] = func.__doc__
-        problem['number'] = rule.endpoint.split('_')[1]
+        problem['number'] = endpoint.split('_')[1]
         if (len(rule.arguments) == 0):
-            problem['endpoint'] = url_for(rule.endpoint)
+            problem['endpoint'] = url_for(endpoint)
         else:
-            problem['endpoint'] = url_for(rule.endpoint, input=4)
+            problem['endpoint'] = url_for(endpoint, input=4)
         problems.append(problem)
     return problems
