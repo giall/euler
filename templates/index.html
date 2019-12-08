@@ -8,7 +8,7 @@
     <h4>Problems</h4>
     <ol>
       {% for i in range(0, len) %}
-        <li><a href="{{ problems[i].endpoint }}">{{ problems[i].name }}</a></li>
+        <li>[{{problems[i].number}}] <a href="{{ problems[i].endpoint }}">{{ problems[i].name }}</a></li>
       {% endfor %}
     </ol>
   </body>

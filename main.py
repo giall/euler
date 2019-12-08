@@ -27,7 +27,9 @@ def problems_list(url_map):
         if ('problem_' not in rule.endpoint):
             continue
         problem = {}
-        problem['name'] = app.view_functions[rule.endpoint].__doc__
+        func = globals().get(rule.endpoint)
+        problem['name'] = func.__doc__
+        problem['number'] = rule.endpoint.split('_')[1]
         if (len(rule.arguments) == 0):
             problem['endpoint'] = url_for(rule.endpoint)
         else:
@@ -50,22 +52,19 @@ def home():
 @app.route('/problem/10')
 def problem_10():
     """Summation of primes"""
-    title = problem_10.__doc__
-    return render_solution(summation_of_primes, title)
+    return render_solution(summation_of_primes, problem_10.__doc__)
 
 
 @app.route('/problem/16')
 def problem_16():
     """Power digit sum"""
-    title = problem_16.__doc__
-    return render_solution(power_digit_sum, title)
+    return render_solution(power_digit_sum, problem_16.__doc__)
 
 
 @app.route('/problem/41/input/<int:input>')
 def problem_41(input):
     """Pandigital prime"""
-    title = problem_41.__doc__
-    return render_solution(pandigital_prime, title, input)
+    return render_solution(pandigital_prime, problem_41.__doc__, input)
 
 
 if __name__ == '__main__':
