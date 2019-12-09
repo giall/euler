@@ -4,11 +4,10 @@
   </head>
   <body>
     <h1>Project Euler</h1>
-    <p>{{ map }}</p>
     <h4>Problems</h4>
     <ol>
       {% for i in range(0, len) %}
-        <li>[{{problems[i].number}}] <a href="{{ problems[i].endpoint }}">{{ problems[i].name }}</a></li>
+        <li>[{{problems[i].number}}] <a href="{{ problems[i].url }}">{{ problems[i].name }}</a></li>
       {% endfor %}
     </ol>
   </body>

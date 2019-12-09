@@ -4,9 +4,9 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-    <p>The answer is {{ answer }}.</p>
-    <p>The calculation took {{ duration }} seconds.</p>
+    <p>{{ description | safe }}</p>
+    <h3>The answer is {{ answer }}.</h3>
+    <p>The calculation took <b>{{ duration }}</b> seconds.</p>
     <a href="/">Go back</a>
   </body>
 </html>
