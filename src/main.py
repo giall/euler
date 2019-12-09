@@ -1,5 +1,4 @@
 from time import time
-from sys import argv
 from flask import Flask, render_template, g, url_for
 from helpers import problems_list, render_solution
 import solutions
@@ -8,11 +7,7 @@ app = Flask(__name__)
 
 
 def main():
-    debug = False
-    for arg in argv[1:]:
-        if (arg == '--debug'):
-            debug = True
-    app.run(host='0.0.0.0', debug=debug)
+    app.run(host='0.0.0.0')
 
 
 @app.before_request
