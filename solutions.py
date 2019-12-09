@@ -1,6 +1,6 @@
-from utils.utils import *
 from functools import reduce
 from math import factorial
+from utils import utils
 
 
 def summation_of_primes(n=1999999):
@@ -9,7 +9,7 @@ def summation_of_primes(n=1999999):
 
     Find the sum of all the primes below two million.
     """
-    sieve = sieve_of_eratosthenes(n)
+    sieve = utils.sieve_of_eratosthenes(n)
     primes = [x for x in range(0, n) if sieve[x]]
     sum = reduce(lambda x, y: x + y, primes)
     return sum
@@ -21,7 +21,7 @@ def power_digit_sum(n=1000):
 
     What is the sum of the digits of the number 2 ** 1000?
     """
-    return sum_of_digits(2 ** n)
+    return utils.sum_of_digits(2 ** n)
 
 
 def factorial_digit_sum(n=100):
@@ -33,7 +33,7 @@ def factorial_digit_sum(n=100):
 
     Find the sum of the digits in the number 100!
     """
-    return sum_of_digits(factorial(n))
+    return utils.sum_of_digits(factorial(n))
 
 
 def pandigital_prime(n):
@@ -44,7 +44,7 @@ def pandigital_prime(n):
     What is the largest n-digit pandigital prime that exists?
     """
     max = 10 ** n
-    sieve = sieve_of_eratosthenes(max)
+    sieve = utils.sieve_of_eratosthenes(max)
     primes = [x for x in range(0, max) if sieve[x]]
-    pandigitals = [x for x in primes if is_pandigital(x)]
+    pandigitals = [x for x in primes if utils.is_pandigital(x)]
     return pandigitals[-1]

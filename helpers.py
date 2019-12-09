@@ -1,6 +1,7 @@
-from flask import render_template, g, url_for
-from time import time
+
 import logging
+from time import time
+from flask import render_template, g, url_for
 
 
 def render_solution(solution, title, input=None):
@@ -10,7 +11,8 @@ def render_solution(solution, title, input=None):
     try:
         answer = str(solution(input))
         duration = '%.3f' % (time() - g.start_time)
-        return render_template('solution.html', title=title, description=description, answer=answer, duration=duration)
+        return render_template('solution.html', title=title, description=description,
+                               answer=answer, duration=duration)
     except Exception as e:
         logging.exception(e)
         return render_template('error.html')
