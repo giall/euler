@@ -1,13 +1,13 @@
-from utils import *
 from unittest import main, TestCase
+from utils import utils
 
 
 class TestPandigital(TestCase):
     def test_should_return_true(self):
-        self.assertTrue(is_pandigital(41235))
+        self.assertTrue(utils.is_pandigital(41235))
 
     def test_should_return_false(self):
-        self.assertFalse(is_pandigital(41234))
+        self.assertFalse(utils.is_pandigital(41234))
 
 
 class TestPrime(TestCase):
@@ -15,7 +15,7 @@ class TestPrime(TestCase):
 
     def __init__(self, *args, **kwargs):
         super(TestPrime, self).__init__(*args, **kwargs)
-        sieve = sieve_of_eratosthenes(100000)
+        sieve = utils.sieve_of_eratosthenes(100000)
         primes = [x for x in range(0, 100000) if sieve[x]]
 
     def test_should_return_true(self):
@@ -27,7 +27,7 @@ class TestPrime(TestCase):
 
 class TestSumOfDigits(TestCase):
     def test_sum_of_digits(self):
-        self.assertEqual(sum_of_digits(12345), 15)
+        self.assertEqual(utils.sum_of_digits(12345), 15)
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ def render_solution(solution, title, input=None):
         answer = str(solution(input))
         duration = '%.3f' % (time() - g.start_time)
         return render_template('solution.html', title=title, description=description,
-                               answer=answer, duration=duration)
+                               answer=answer, duration=duration, input=input)
     except Exception as e:
         logging.exception(e)
         return render_template('error.html')
@@ -33,7 +33,7 @@ def get_problem(rule, func):
     if (len(rule.arguments) == 0):
         problem['url'] = url_for(endpoint)
     else:
-        problem['url'] = url_for(endpoint, input=4)
+        problem['url'] = url_for(endpoint, input=7)
     return problem
 
 
